@@ -1,0 +1,3 @@
+﻿  main.cpp
+d:\projects in vs\pvsis\lab1\src\main.cpp(10): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  lab1.vcxproj -> D:\projects in VS\PvSis\lab1\Debug\lab1.exe
