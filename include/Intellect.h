@@ -11,7 +11,7 @@ using namespace std;
 class Intellect {
 public:
     virtual void initialize(vector< vector<int> > &map) = 0;
-    virtual int make_turn(vector<vector<int>> &map1, vector<vector<int>> &map, int size) = 0;
+    virtual int make_turn(vector<vector<int>> &map1, vector<vector<int>> &map) = 0;
     virtual int answer(pair<int, int> coords, vector<vector<int>> &map) = 0;
 protected:
     void clearing(vector< vector<int> > &map, int x, int y){

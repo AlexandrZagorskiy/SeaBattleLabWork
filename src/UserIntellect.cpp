@@ -8,7 +8,7 @@ UserIntellect::UserIntellect() {
     computer_map_for_user.resize(12, vector<int>(12, 0));
 }
 
-int UserIntellect::make_turn(vector<vector<int>> &map1, vector<vector<int>> &map, int size) {
+int UserIntellect::make_turn(vector<vector<int>> &map1, vector<vector<int>> &map) {
     InputController inputController;
     ComputerIntellect computerIntellect;
     pair<int, int> cur_coords = inputController.get_coordinates();
@@ -17,6 +17,7 @@ int UserIntellect::make_turn(vector<vector<int>> &map1, vector<vector<int>> &map
     else if(ans == 1) map1[cur_coords.second][cur_coords.first] = 2;
     else {
         kill_ship(cur_coords, map1);
+		ships_killed++;
     }
     return ans;
 }
@@ -26,6 +27,7 @@ void UserIntellect::initialize(vector< vector<int> > &map) {
     pair<int, int> cur_coordinate, last_coordinate;
     pair<int, pair<int, int> > value_from_dist;
     InputController inputController;
+	ships_killed = 0;
     PresentationController presentationController(0, 10);
     presentationController.print(map, empty);
 
@@ -83,4 +85,8 @@ int UserIntellect::answer(pair<int, int> coords, vector<vector<int>> &map){
     kill_ship(coords, map);
     presentationController.comp_shoot(coords);
     return 2;
+}
+
+int UserIntellect::getShipsKilled() {
+	return ships_killed;
 }

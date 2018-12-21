@@ -56,7 +56,7 @@ bool PresentationController::start_of_the_game(string str) {
     string ans, ans_copy;
     cout << str << endl;
     cin >> ans;
-    for(char cur: ans){
+    for(char cur: ans) {
        ans_copy += to_lower(cur);
     }
 	if (ans_copy == "yes") {

@@ -11,10 +11,10 @@ ComputerIntellect::ComputerIntellect() {
     computer_map_for_comp.resize(12, vector<int>(12, 0));
 }
 
-pair<int, int> ComputerIntellect::generate_shoot_coordinates(vector<vector<int>> &map, int size) {
+pair<int, int> ComputerIntellect::generate_shoot_coordinates(vector<vector<int>> &map) {
     vector<pair<int, int>> coordinates;
     for (int i = 1; i < 11; i++) {
-        for (int j = i % size; j < 11; j += size) {
+        for (int j = i; j < 11; j = j+i) {
             if(j == 0) continue;
             if(map[i][j] == 0) {
                 coordinates.push_back(make_pair(i, j));
@@ -24,14 +24,15 @@ pair<int, int> ComputerIntellect::generate_shoot_coordinates(vector<vector<int>>
     return coordinates[rand() % coordinates.size()];
 }
 
-int ComputerIntellect::make_turn(vector<vector<int>> &map1, vector<vector<int>> &map, int size) {
+int ComputerIntellect::make_turn(vector<vector<int>> &map1, vector<vector<int>> &map) {
     UserIntellect userIntellect;
-    pair<int, int> cur_coords = generate_shoot_coordinates(map1, size);
+    pair<int, int> cur_coords = generate_shoot_coordinates(map1);
     int ans = userIntellect.answer(cur_coords, map);
     if(ans == 0) map1[cur_coords.second][cur_coords.first] = 1;
     else if(ans == 1) map1[cur_coords.second][cur_coords.first] = 2;
     else {
         kill_ship(cur_coords, map1);
+		ships_killed++;
     }
     return ans;
 }
@@ -91,6 +92,7 @@ void ComputerIntellect::generate_coordinates(pair<int, int> &cur_coordinate, pai
 void ComputerIntellect::initialize(vector< vector<int> > &map) {
         vector< vector<int> > empty(12, vector<int>(12, 0));
         pair <int, int> cur_coordinate, last_coordinate, dir;
+		ships_killed = 0;
 
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < i + 1; ++j) {
@@ -123,4 +125,9 @@ void ComputerIntellect::initialize(vector< vector<int> > &map) {
             }
         }
     }
+
+
+int ComputerIntellect::getShipsKilled() {
+	return ships_killed;
+}
 
